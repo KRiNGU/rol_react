@@ -1,0 +1,59 @@
+.card {
+    margin-left: 9px;
+    margin-right: 9px;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 20px;
+    width: 282px;
+    line-height: 0;
+}
+
+.card__foto {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 200px;
+}
+
+.card__description {
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 12px;
+    background-color: #fff;
+}
+
+.card__title {
+    padding: 0;
+    margin: 0;
+}
+
+.card__like-button {
+    background-repeat: no-repeat;
+    background-image: url(./heart.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+    min-width: 22px;
+    min-height: 19px;
+    cursor: pointer;
+    padding:0;
+    transition: opacity 0.3s;
+}
+
+.card__like-button_active {
+    background-image: url(./heart-red.svg);
+}
+
+.card__delete-button {
+    background-image: url(./delete.svg);
+    cursor: pointer;
+    background-position: center; 
+    background-color: transparent;
+    width: 18px; 
+    height: 19px; 
+    position: absolute; 
+    border: none; 
+    top:15px; 
+    right: 15px; 
+}

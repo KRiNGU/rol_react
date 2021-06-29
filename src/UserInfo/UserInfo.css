@@ -1,0 +1,57 @@
+.user {
+    padding: 20px 10px 20px 10px;
+    height: 160px;
+    background-color: #000;
+    color: #fff;
+}
+
+.user__header {
+    margin: 0px;
+}
+
+.user__link {
+    margin: 0px;
+    height:75px;
+    width: 75px;
+}
+
+.user__edit-info-button {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(./pen.svg);
+    background-color: transparent;
+    background-position: center;
+}
+
+.user__add-card-button {
+    cursor: pointer;
+    color: #fff;
+    background-color: #000;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    width:100px;
+    height: 30px;
+    font-size: 30px;
+    line-height: 0px;
+}
+
+.user__profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user__info {
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.user__text {
+    display: flex;
+    flex-direction: column;
+}
