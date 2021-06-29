@@ -1,22 +1,17 @@
 import React from "react";
 import "../Popup.css";
 
-export default class EditUserPopup extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  onChange = (event) => {
+const onChange = (event, onChange) => {
     const id = event.target.id;
     const value = event.target.value;
-    this.props.onChange(id, value);
+    onChange(id, value);
   };
 
-  render() {
+export default function EditUserPopup(props) {
     return (
       <div
         className={`modal modal__form_type_edit-user ${
-          this.props.open ? "modal_open" : ""
+          props.open ? "modal_open" : ""
         }`}
       >
         <div className="modal__box">
@@ -24,12 +19,12 @@ export default class EditUserPopup extends React.Component {
             noValidate
             className="modal__form modal__form_type_edit-user"
             name="edit-form"
-            onSubmit={(e) => this.props.onSubmit(e)}
+            onSubmit={(e) => props.onSubmit(e)}
           >
             <button
               type="button"
               className="modal__close-button modal__close-button_type-new-place"
-              onClick={this.props.onClick}
+              onClick={props.onClick}
             >
               &times;
             </button>
@@ -40,8 +35,8 @@ export default class EditUserPopup extends React.Component {
               id="name"
               name="name"
               placeholder="User"
-              value={this.props.name}
-              onChange={(event) => this.onChange(event)}
+              value={props.name}
+              onChange={(event) => onChange(event, props.onChange)}
               required
             />
             <input
@@ -50,8 +45,8 @@ export default class EditUserPopup extends React.Component {
               id="description"
               name="description"
               placeholder="User description"
-              value={this.props.description}
-              onChange={(event) => this.onChange(event)}
+              value={props.description}
+              onChange={(event) => onChange(event, props.onChange)}
               required
             />
             <input
@@ -60,8 +55,8 @@ export default class EditUserPopup extends React.Component {
               id="avatar"
               name="avatar"
               placeholder="User avatar link"
-              value={this.props.avatar}
-              onChange={(event) => this.onChange(event)}
+              value={props.avatar}
+              onChange={(event) => onChange(event, props.onChange)}
               required
             />
             <button
@@ -76,4 +71,3 @@ export default class EditUserPopup extends React.Component {
       </div>
     );
   }
-}

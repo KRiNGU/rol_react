@@ -51,7 +51,7 @@ class App extends React.Component {
   }
 
   toggleEditUser() {
-    this.setState({editUserOpen: !this.state.editUserOpen});
+    this.setState((prevState)=>({editUserOpen: !prevState.editUserOpen}));
   }
 
   onInputChange(id, value) {
@@ -73,7 +73,7 @@ class App extends React.Component {
       <main className="main">
         <UserInfo 
           info={this.state.info}
-          openEditUserPopup={()=>this.setState({editUserOpen: !this.state.editUserOpen})}
+          openEditUserPopup={()=>this.toggleEditUser()}
           openAddCardPopup={openAddCardPopup}
         />
         <ul className="cards">
