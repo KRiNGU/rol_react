@@ -35,17 +35,17 @@ class App extends React.Component {
     }
   }
 
-  deleteCard(i) {
-    this.setState((prevState)=>({cardList: prevState.cardList.filter((card) => card.id !== i)}));
+  deleteCard(id) {
+    this.setState((prevState)=>({cardList: prevState.cardList.filter((card) => card.id !== id)}));
   }
 
-  renderCard({title, link, id}, index){
+  renderCard({title, link, id}){
     return (
       <Card 
         key={id}
         title={title}
         link={link}
-        onClick={()=>this.deleteCard(index)}
+        onClick={()=>this.deleteCard(id)}
       />
     );
   }
@@ -77,8 +77,8 @@ class App extends React.Component {
           openAddCardPopup={openAddCardPopup}
         />
         <ul className="cards">
-          {this.state.cardList.map((card, index) =>
-            this.renderCard(card, index)
+          {this.state.cardList.map((card) =>
+            this.renderCard(card)
           )}
         </ul>
         <EditUserPopup
