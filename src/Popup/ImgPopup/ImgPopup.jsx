@@ -5,7 +5,6 @@ export default function ImgPopup(props) {
     <div className={`modal modal__open-img ${
         props.open ? "modal_open" : ""
       }`}
-      title="overlay"
       onClick={(e)=>props.onOverlayClick(e)}
       >
       <div className="modal__box modal__box_open-img">

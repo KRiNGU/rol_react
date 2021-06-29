@@ -131,7 +131,7 @@ class App extends React.Component {
           open={this.state.imgOpen}
           onClick={()=>this.toggleModal('imgOpen')}
           onOverlayClick={(e)=>{
-            if (e.target.title === "overlay") {
+            if (e.target === e.currentTarget) {
               this.toggleModal('imgOpen');
             }
           }}
