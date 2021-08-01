@@ -3,9 +3,9 @@ import "../Popup.css";
 
 export default function AddCardPopup(props) {
   const onChange = (event, onChange) => {
-    const id = event.target.id;
+    const name = event.target.name;
     const value = event.target.value;
-    onChange(id, value);
+    onChange(name, value);
   };
 
   return (
@@ -43,7 +43,7 @@ export default function AddCardPopup(props) {
             type="url"
             className="modal__input modal__input-card-url"
             id="card-url"
-            name="card-url"
+            name="link"
             placeholder="Card url"
             value={props.card}
             onChange={(event) => onChange(event, props.onChange)}
