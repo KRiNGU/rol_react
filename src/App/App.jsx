@@ -55,17 +55,15 @@ function App(props) {
   const keyPressed = (event) => {
     if (event.code === 'Escape') {
       setUserPopupInfo(prevState => ({...prevState, isOpen: false}));
-      setUserPopupInfo(prevState => ({...prevState, isOpen: false}));
-      setUserPopupInfo(prevState => ({...prevState, isOpen: false}));
+      setCardPopupInfo(prevState => ({...prevState, isOpen: false}));
+      setImgOpenPopupInfo(prevState => ({...prevState, isOpen: false}));
     }
   }
 
   const onAddCardSubmit = (e) => {
     e.preventDefault();
-    const newId = cardList.length;
-    const newCardList = cardList;
-    newCardList.push({title: cardPopupInfo.title, link: cardPopupInfo.link, id: newId});
-    setCardList(newCardList);
+    const newCard = {title: cardPopupInfo.title, link: cardPopupInfo.link, id: cardList.length};
+    setCardList(prevState => [...prevState, newCard]);
     toggleAddCard();
   };
 

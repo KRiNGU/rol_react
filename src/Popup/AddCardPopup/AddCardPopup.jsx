@@ -2,10 +2,10 @@ import React from "react";
 import "../Popup.css";
 
 export default function AddCardPopup(props) {
-  const onChange = (event, onChange) => {
+  const onChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    onChange(name, value);
+    props.onChange(name, value);
   };
 
   return (
@@ -36,7 +36,7 @@ export default function AddCardPopup(props) {
             name="title"
             placeholder="Title"
             value={props.title}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <input
@@ -46,7 +46,7 @@ export default function AddCardPopup(props) {
             name="link"
             placeholder="Card url"
             value={props.card}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <button
