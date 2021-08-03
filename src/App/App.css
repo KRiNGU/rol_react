@@ -1,0 +1,40 @@
+/* Basic settings */
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    background-color: #222;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* Main container */
+
+.main {
+  width: 900px;
+  padding: 0;
+  margin: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+      width: 600px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .main {
+      width: 300px;
+  }
+}
+
+/* Cards */
+
+.cards {
+  padding-left: 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
