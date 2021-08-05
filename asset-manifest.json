@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/rol_react/static/css/main.7f152319.chunk.css",
+    "main.js": "/rol_react/static/js/main.b5e1a75f.chunk.js",
+    "main.js.map": "/rol_react/static/js/main.b5e1a75f.chunk.js.map",
+    "runtime-main.js": "/rol_react/static/js/runtime-main.d8552c6f.js",
+    "runtime-main.js.map": "/rol_react/static/js/runtime-main.d8552c6f.js.map",
+    "static/js/2.82738830.chunk.js": "/rol_react/static/js/2.82738830.chunk.js",
+    "static/js/2.82738830.chunk.js.map": "/rol_react/static/js/2.82738830.chunk.js.map",
+    "static/js/3.d566f407.chunk.js": "/rol_react/static/js/3.d566f407.chunk.js",
+    "static/js/3.d566f407.chunk.js.map": "/rol_react/static/js/3.d566f407.chunk.js.map",
+    "index.html": "/rol_react/index.html",
+    "static/css/main.7f152319.chunk.css.map": "/rol_react/static/css/main.7f152319.chunk.css.map",
+    "static/js/2.82738830.chunk.js.LICENSE.txt": "/rol_react/static/js/2.82738830.chunk.js.LICENSE.txt",
+    "static/media/Card.css": "/rol_react/static/media/heart.c31d61db.svg",
+    "static/media/UserInfo.css": "/rol_react/static/media/pen.c01f334c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d8552c6f.js",
+    "static/js/2.82738830.chunk.js",
+    "static/css/main.7f152319.chunk.css",
+    "static/js/main.b5e1a75f.chunk.js"
+  ]
+}
