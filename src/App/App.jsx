@@ -69,6 +69,14 @@ function App(props) {
     toggleAddCard();
   };
 
+  const handleOnDragEnd = (result) => {
+    const cards = Array.from(cardList);
+    const [reorderedCards] = cards.splice(result.source.index, 1);
+    cards.splice(result.destination.index, 0, reorderedCards);
+
+    setCardList(cards);
+  }
+
     return (
       <main className="main"
         onKeyDown={(e) => keyPressed(e)}
@@ -79,10 +87,10 @@ function App(props) {
           openEditUserPopup={() => toggleEditUser()}
           openAddCardPopup={() => toggleAddCard()}
         />
-        <DragDropContext>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="cards">
             {(provided) => (
-              <ul className="cards" {...provided.droppableProps} ref={provided.innerRef}>
+              <ul type="none" className="cards" {...provided.droppableProps} ref={provided.innerRef}>
                 {cardList.map((card, index) => (
                   <Card
                     index={index}
@@ -94,6 +102,7 @@ function App(props) {
                     onImgClick={()=> openImage(index)}
                   />
                 ))}
+                {provided.placeholder}
               </ul>
             )}
           </Droppable>

@@ -13,7 +13,7 @@ export default function Card(props) {
   return (
     <Draggable key={props.identifier} draggableId={props.identifier.toString()} index={props.index}>
       {(provided) => (
-        <li type="none" className="card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+        <li className="card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
           <button
             className="card__delete-button"
             onClick={props.onClick}
