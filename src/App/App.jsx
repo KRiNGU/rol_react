@@ -87,6 +87,7 @@ function App(props) {
                   <Card
                     index={index}
                     key={card.id}
+                    identifier={card.id}
                     title={card.title}
                     link={card.link}
                     onClick={() => deleteCard(card.id)}

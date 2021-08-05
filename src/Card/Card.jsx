@@ -11,9 +11,9 @@ export default function Card(props) {
   }
 
   return (
-    <Draggable key={props.key} draggableId={props.key} index={props.index}>
+    <Draggable key={props.identifier} draggableId={props.identifier.toString()} index={props.index}>
       {(provided) => (
-        <li className="card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+        <li type="none" className="card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
           <button
             className="card__delete-button"
             onClick={props.onClick}
@@ -29,8 +29,8 @@ export default function Card(props) {
             <h2 className="card__title">{props.title}</h2>
             <button
               className={liked
-        ? "card__like-button card__like-button_active"
-        : "card__like-button"}
+                ? "card__like-button card__like-button_active"
+                : "card__like-button"}
               onClick={toggleLike}
               aria-label="Поставить лайк"
             ></button>
