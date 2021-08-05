@@ -1,5 +1,7 @@
 import "./App.css";
-import React from "react";
+import React, {useState} from "react";
+import {DragDropContext, Droppable} from 'react-beautiful-dnd';
+
 import UserInfo from "../UserInfo/UserInfo.jsx";
 import Card from "../Card/Card.jsx";
 import EditUserPopup from "../Popup/EditUserPopup/EditUserPopup.jsx";
@@ -11,134 +13,120 @@ const description = "JS junior Dev";
 const link =
   "https://kubnews.ru/upload/iblock/aed/aede721d1ff8a00da41315253fc7aec7.jpg";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      info: {
-        name: userName,
-        description: description,
-        avatar: link,
-      },
-      cardList: [
-        { title: "Snake", link: link, id: 0 },
-        { title: "Snake", link: link, id: 1 },
-        { title: "Snake", link: link, id: 2 },
-        { title: "Snake", link: link, id: 3 },
-        { title: "Snake", link: link, id: 4 },
-      ],
-      editUserOpen: false,
-      name: "",
-      description: "",
-      avatar: "",
-      addCardOpen: false,
-      title: '',
-      "card-url": '',
-      imgOpen: false,
-      imgTitle: '',
-      imgLink: ''
-    };
+function App(props) {
+  const [info, setInfo] = useState({name: userName, description: description, avatar: link});
+  const [cardList, setCardList] = useState([
+    { title: "Snake", link: link, id: 0 },
+    { title: "Snake", link: link, id: 1 },
+    { title: "Snake", link: link, id: 2 },
+    { title: "Snake", link: link, id: 3 },
+    { title: "Snake", link: link, id: 4 }
+  ]);
+  const [userPopupInfo, setUserPopupInfo] = useState({isOpen: false, name: '', description: '', avatar: ''});
+  const [cardPopupInfo, setCardPopupInfo] = useState({isOpen: false, title: '', link: ''});
+  const [imgOpenPopupInfo, setImgOpenPopupInfo] = useState({isOpen: false, title: '', link: ''});
+
+
+  const deleteCard = (id) => {
+    setCardList(cardList.filter(card => card.id !== id));
   }
 
-  deleteCard(id) {
-    this.setState((prevState) => ({
-      cardList: prevState.cardList.filter((card) => card.id !== id),
-    }));
+  const toggleEditUser = () => {
+    setUserPopupInfo(prevState => ({...prevState, isOpen: !prevState.isOpen}));
   }
 
-  toggleModal(modal) {
-    this.setState((prevState) => ({ [modal]: !prevState[modal] }));
+  const toggleAddCard = () => {
+    setCardPopupInfo(prevState => ({...prevState, isOpen: !prevState.isOpen}));
   }
 
-  openImage(id) {
-    this.setState((prevState)=>({imgTitle: prevState.cardList[id].title, imgLink: prevState.cardList[id].link}))
-    this.toggleModal('imgOpen');
+  const toggleImgOpen = () => {
+    setImgOpenPopupInfo(prevState => ({...prevState, isOpen: !prevState.isOpen}));
   }
 
-  onInputChange(id, value) {
-    this.setState({ [id]: value });
+  const openImage = (id) => {
+    setImgOpenPopupInfo({isOpen: imgOpenPopupInfo.isOpen, title: cardList[id].title, link: cardList[id].link});
+    toggleImgOpen();
   }
 
-  onUserEditSubmit(e) {
+  const onUserEditSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      info: {
-        name: this.state.name,
-        description: this.state.description,
-        avatar: this.state.avatar,
-      },
-    });
-    this.toggleModal('editUserOpen');
+    setInfo({name: userPopupInfo.name, description: userPopupInfo.description, avatar: userPopupInfo.avatar});
+    toggleEditUser();
   }
 
-  keyPressed(event) {
-    if(event.code === 'Escape') {
-      this.setState({editUserOpen: false, addCardOpen: false, imgOpen: false});
+  const keyPressed = (event) => {
+    if (event.code === 'Escape') {
+      setUserPopupInfo(prevState => ({...prevState, isOpen: false}));
+      setCardPopupInfo(prevState => ({...prevState, isOpen: false}));
+      setImgOpenPopupInfo(prevState => ({...prevState, isOpen: false}));
     }
   }
 
-  onAddCardSubmit(e) {
+  const onAddCardSubmit = (e) => {
     e.preventDefault();
-    const newId = this.state.cardList.length;
-    const newCardList = this.state.cardList;
-    newCardList.push({title: this.state.title, link: this.state['card-url'], id: newId});
-    this.setState({cardList: newCardList});
-    this.toggleModal('addCardOpen');
-  }
+    const newCard = {title: cardPopupInfo.title, link: cardPopupInfo.link, id: cardList.length};
+    setCardList(prevState => [...prevState, newCard]);
+    toggleAddCard();
+  };
 
-  render() {
     return (
       <main className="main"
-        onKeyDown={(e) => this.keyPressed(e)}
+        onKeyDown={(e) => keyPressed(e)}
         tabIndex="0"
       >
         <UserInfo
-          info={this.state.info}
-          openEditUserPopup={() => this.toggleModal('editUserOpen')}
-          openAddCardPopup={() => this.toggleModal('addCardOpen')}
+          info={info}
+          openEditUserPopup={() => toggleEditUser()}
+          openAddCardPopup={() => toggleAddCard()}
         />
-        <ul className="cards">
-          {this.state.cardList.map((card, index) => (
-            <Card
-              key={card.id}
-              title={card.title}
-              link={card.link}
-              onClick={() => this.deleteCard(card.id)}
-              onImgClick={()=>this.openImage(index)}
-            />
-          ))}
-        </ul>
+        <DragDropContext>
+          <Droppable droppableId="cards">
+            {(provided) => (
+              <ul className="cards" {...provided.droppableProps} ref={provided.innerRef}>
+                {cardList.map((card, index) => (
+                  <Card
+                    index={index}
+                    key={card.id}
+                    title={card.title}
+                    link={card.link}
+                    onClick={() => deleteCard(card.id)}
+                    onImgClick={()=> openImage(index)}
+                  />
+                ))}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
         <EditUserPopup
-          onChange={(id, value) => this.onInputChange(id, value)}
-          onSubmit={(e) => this.onUserEditSubmit(e)}
-          onClick={() => this.toggleModal('editUserOpen')}
-          name={this.state.name}
-          description={this.state.description}
-          avatar={this.state.avatar}
-          open={this.state.editUserOpen}
+          onChange={(field, value) => setUserPopupInfo(prevState => ({...prevState, [field]: value}))}
+          onSubmit={(e) => onUserEditSubmit(e)}
+          onClick={() => toggleEditUser()}
+          name={userPopupInfo.name}
+          description={userPopupInfo.description}
+          avatar={userPopupInfo.avatar}
+          open={userPopupInfo.isOpen}
         />
         <AddCardPopup
-          onChange={(id, value) => this.onInputChange(id, value)}
-          onSubmit={(e) => this.onAddCardSubmit(e)}
-          onClick={() => this.toggleModal('addCardOpen')}
-          title={this.state.title}
-          card={this.state["card-url"]}
-          open={this.state.addCardOpen}
+          onChange={(field, value) => setCardPopupInfo(prevState => ({...prevState, [field]: value}))}
+          onSubmit={(e) => onAddCardSubmit(e)}
+          onClick={() => toggleAddCard()}
+          title={cardPopupInfo.title}
+          card={cardPopupInfo.link}
+          open={cardPopupInfo.isOpen}
         />
         <ImgPopup
-          title={this.state.imgTitle}
-          src={this.state.imgLink}
-          open={this.state.imgOpen}
-          onClick={()=>this.toggleModal('imgOpen')}
+          title={imgOpenPopupInfo.title}
+          src={imgOpenPopupInfo.link}
+          open={imgOpenPopupInfo.isOpen}
+          onClick={()=> toggleImgOpen()}
           onOverlayClick={(e)=>{
             if (e.target === e.currentTarget) {
-              this.toggleModal('imgOpen');
+              toggleImgOpen();
             }
           }}
         />
       </main>
     );
-  }
 }
 
 export default App;
