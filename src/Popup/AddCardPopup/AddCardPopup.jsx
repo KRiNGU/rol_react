@@ -2,10 +2,10 @@ import React from "react";
 import "../Popup.css";
 
 export default function AddCardPopup(props) {
-  const onChange = (event, onChange) => {
-    const id = event.target.id;
+  const onChange = (event) => {
+    const name = event.target.name;
     const value = event.target.value;
-    onChange(id, value);
+    props.onChange(name, value);
   };
 
   return (
@@ -36,17 +36,17 @@ export default function AddCardPopup(props) {
             name="title"
             placeholder="Title"
             value={props.title}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <input
             type="url"
             className="modal__input modal__input-card-url"
             id="card-url"
-            name="card-url"
+            name="link"
             placeholder="Card url"
             value={props.card}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <button

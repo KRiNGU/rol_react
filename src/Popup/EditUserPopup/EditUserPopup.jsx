@@ -2,10 +2,10 @@ import React from "react";
 import "../Popup.css";
 
 export default function EditUserPopup(props) {
-  const onChange = (event, onChange) => {
+  const onChange = (event) => {
     const id = event.target.id;
     const value = event.target.value;
-    onChange(id, value);
+    props.onChange(id, value);
   };
 
   return (
@@ -36,7 +36,7 @@ export default function EditUserPopup(props) {
             name="name"
             placeholder="User"
             value={props.name}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <input
@@ -46,7 +46,7 @@ export default function EditUserPopup(props) {
             name="description"
             placeholder="User description"
             value={props.description}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <input
@@ -56,7 +56,7 @@ export default function EditUserPopup(props) {
             name="avatar"
             placeholder="User avatar link"
             value={props.avatar}
-            onChange={(event) => onChange(event, props.onChange)}
+            onChange={onChange}
             required
           />
           <button
